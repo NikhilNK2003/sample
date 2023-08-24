@@ -31,26 +31,89 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TableLayout
-        android:layout_width="409dp"
-        android:layout_height="587dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/employee"
+                android:id="@+id/employee">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/emp_dept"
+                android:id="@+id/employeedept">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/emp_jobs"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/employeejobs">
+            </ImageView>
+        </TableRow>
 
         <TableRow
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/customer"
+                android:id="@+id/customer">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/colour"
+                android:id="@+id/colour">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/size"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/size">
+            </ImageView>
+        </TableRow>
         <TableRow
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/operation_group"
+                android:id="@+id/operationgrp">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/opration"
+                android:id="@+id/operation">
+            </ImageView>
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:src="@drawable/skill"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/skill">
+            </ImageView>
+        </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
     </TableLayout>
 
 

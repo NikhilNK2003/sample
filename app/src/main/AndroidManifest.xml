@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MAS"
         tools:targetApi="31">
         <activity
+            android:name=".Size"
+            android:exported="false" />
+        <activity
             android:name=".Skill"
             android:exported="false" />
         <activity
