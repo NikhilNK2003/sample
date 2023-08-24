@@ -23,7 +23,7 @@
         android:layout_height="171dp"
         android:layout_marginTop="28dp"
         android:gravity="center_horizontal"
-        android:text="WELCOME                                 TO                                    MAS SYSTEMS"
+        android:text="WELCOME                                         TO                          MAS SYSTEMS"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="40dp"

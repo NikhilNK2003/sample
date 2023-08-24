@@ -14,10 +14,10 @@ public interface CustomerApiService {
     @GET("/api/customers/getAll")
     Call<List<CustomerModel>> getAllCustomers();
 
-    @PUT("/api/customers/{customer_id}")
+    @PUT("/api/customers/edit/{customer_id}")
     Call<Void> updateCustomer(@Path("customer_id") String customerId, @Body CustomerModel customer);
 
-    @DELETE("/api/customers/{customer_id}")
+    @DELETE("/api/customers/delete/{customer_id}")
     Call<Void> deleteCustomer(@Path("customer_id") String customerId);
 }
 
