@@ -1,5 +1,6 @@
 package com.example.mas.Adapter;
 
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.mas.Model.SkillModel;
 import com.example.mas.R;
 
 import java.util.List;
 
 public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> {
+
 
     private List<SkillModel> skills;
     private OnItemClickListener listener;
@@ -56,12 +59,14 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_skill, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         SkillModel skill = skills.get(position);
         holder.tvSkill.setText(skill.getSkill_id() + "         " + skill.getDescription());
     }
@@ -70,4 +75,5 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> 
     public int getItemCount() {
         return skills.size();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.example.mas.Model;
 
+
 public class SkillModel { private String skill_id;
     private String description;
 

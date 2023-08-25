@@ -15,9 +15,9 @@ import retrofit2.http.Path;
 
 public interface ColourApiservice {
     @POST("/api/clothcolors/create")
-    Call<Void> createcolour(@Body Colourmodel colour);
+    Call<Void> createColour(@Body Colourmodel colour);
 
-    @GET("/api/clothcolors/getAll")
+    @GET("/api/clothcolors/getall")
     Call<List<Colourmodel>> getAllColours();
 
     @PUT("/api/clothcolors/edit/{color_id}")

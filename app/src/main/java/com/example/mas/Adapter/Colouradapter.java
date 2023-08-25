@@ -44,7 +44,7 @@ public class Colouradapter extends RecyclerView.Adapter<Colouradapter.ViewHolder
         return colours.size();
     }
 
-    public void setCustomers(List<Colourmodel> colours) {
+    public void setColours(List<Colourmodel> colours) {
         this.colours = colours;
         notifyDataSetChanged();
     }

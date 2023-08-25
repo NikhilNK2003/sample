@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/SizeIdTextView"
+        android:id="@+id/sizeIdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Size ID"
@@ -14,7 +14,7 @@
         android:textSize="20dp"/>
 
     <TextView
-        android:id="@+id/sizeDescTextView"
+        android:id="@+id/sizedescTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Description"
