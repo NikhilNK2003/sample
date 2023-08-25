@@ -11,54 +11,56 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mas.Model.Colourmodel;
 //import com.example.mas.Model.CustomerModel;
+import com.example.mas.Model.SkillModel;
 import com.example.mas.R;
 
 import java.util.List;
 
-public class Colouradapter extends RecyclerView.Adapter<Colouradapter.ViewHolder> {
+public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> {
 
     private Context context;
-    private List<Colourmodel> colours;
+    private List<SkillModel> skills;
 
-    public Colouradapter(Context context, List<Colourmodel> colours) {
+    public SkillAdapter(Context context,List<SkillModel> skills) {
         this.context = context;
-        this.colours = colours;
+        this.skills = skills;
     }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_colour, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_skill, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Colourmodel colour = colours.get(position);
-        holder.colourdescriTextView.setText(colour.getDescription());
-        holder.colourIdTextView.setText(colour.getColor_id());
+        SkillModel colour = skills.get(position);
+        holder.skilldescriTextView.setText(colour.getSkill_description());
+        holder.skillIdTextView.setText(colour.getSkill_id());
     }
 
     @Override
     public int getItemCount() {
-        return colours.size();
+        return skills.size();
     }
 
-    public void setColours(List<Colourmodel> colours) {
-        this.colours = colours;
+    public void setSkills(List<SkillModel> skills) {
+        this.skills = skills;
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView colourdescriTextView;
+        TextView skilldescriTextView;
 
-        TextView colourIdTextView;
+        TextView skillIdTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            colourdescriTextView = itemView.findViewById(R.id.colourdescTextView);
+            skilldescriTextView = itemView.findViewById(R.id.skilldescTextView);
 
-            colourIdTextView = itemView.findViewById((R.id.colourIdTextView));
+            skillIdTextView = itemView.findViewById((R.id.skillIdTextView));
         }
     }
 }

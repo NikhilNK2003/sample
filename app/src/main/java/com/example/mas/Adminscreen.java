@@ -26,6 +26,8 @@ public class Adminscreen extends AppCompatActivity {
         img4=findViewById(R.id.customer);
         img9=findViewById(R.id.skill);
         img5=findViewById(R.id.colour);
+        img6=findViewById(R.id.size);
+        img3=findViewById(R.id.employeejobs);
        img4.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
@@ -43,6 +45,21 @@ public class Adminscreen extends AppCompatActivity {
            @Override
            public void onClick(View view) {
                startActivity(new Intent(Adminscreen.this, Colouractivity.class));
+           }
+       });
+
+       img6.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(Adminscreen.this, SizeActivity.class));
+           }
+       });
+
+       img3.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(Adminscreen.this, EmployeeJobsActivity.class));
+
            }
        });
     }
