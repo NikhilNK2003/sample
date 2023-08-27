@@ -1,11 +1,10 @@
 package com.example.mas;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mas.Adapter.Colouradapter;
@@ -16,11 +15,11 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class Colouractivity extends AppCompatActivity {
     private ColourApiservice colourApi;
-    private RecyclerView recyclerView;
+    private RecyclerView colourrecyclerView;
     private Colouradapter colourAdapter;
+    private List<Colourmodel> colourList;
     private Button btnCreate;
     private Button btnGetAll;
     private Button btnUpdate;
@@ -32,12 +31,11 @@ public class Colouractivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colouractivity);
-
+        colourrecyclerView = findViewById(R.id.colourRecyclerView);
+        colourrecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        colourAdapter = new Colouradapter(new ArrayList<>());
+        colourrecyclerView.setAdapter(colourAdapter);
         colourApi = RetrofitInstance.getRetrofitInstance().create(ColourApiservice.class);
-        recyclerView = findViewById(R.id.colourRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        colourAdapter = new Colouradapter(this, new ArrayList<>());
-        recyclerView.setAdapter(colourAdapter);
 
         btnCreate = findViewById(R.id.colouraddButton);
         btnGetAll = findViewById(R.id.colourviewAllButton);
@@ -45,66 +43,66 @@ public class Colouractivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.colourdeleteButton);
         etColourId = findViewById(R.id.colourIdEditText);
         etDescription = findViewById(R.id.colourdescEditText);
-
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                    createColour();
+            public void onClick(View view) {
+                String colourId = etColourId.getText().toString().trim();
+                String description = etDescription.getText().toString().trim();
+                if (!colourId.isEmpty() && !description.isEmpty()) {
+                    Colourmodel newColour = new Colourmodel(colourId, description);
+                    createColour(newColour);
                 }
-            });
+            }
+        });
 
-                btnGetAll.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        getAllColours();
-                    }
-                });
+        btnGetAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAllColours();
+            }
+        });
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateColour();
+                String colourId = etColourId.getText().toString().trim();
+                String description = etDescription.getText().toString().trim();
+                if (!colourId.isEmpty() && !description.isEmpty()) {
+                    Colourmodel updatedColour = new Colourmodel(colourId, description);
+                    updateColour(colourId, updatedColour);
+                }
             }
         });
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                deleteColour();
+            public void onClick(View view) {
+                String colourId = etColourId.getText().toString().trim();
+                if (!colourId.isEmpty()) {
+                    deleteColour(colourId);
+                }
             }
-
         });
 
-    };
+    }
 
-
-
-
-
-    private void createColour() {
-        String colourId = etColourId.getText().toString().trim();
-        String description = etDescription.getText().toString().trim();
-        if (!colourId.isEmpty() && !description.isEmpty()) {
-        Call<Void> call = colourApi.createColour(new Colourmodel(colourId, description));
-
+    private void createColour(Colourmodel colour) {
+        Call<Void> call = colourApi.createColour(colour);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    etColourId.setText("");
-                    etDescription.setText("");
                     getAllColours(); // Refresh the list after creating the color
                 } else {
-                    Log.e("API", "Failed to create colours: " + response.code());
+                    // Handle error
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e("API", "Failed to create colours: " + t.getMessage());
+                // Handle failure
             }
         });
-    }
     }
 
     private void getAllColours() {
@@ -114,65 +112,54 @@ public class Colouractivity extends AppCompatActivity {
             public void onResponse(Call<List<Colourmodel>> call, Response<List<Colourmodel>> response) {
                 if (response.isSuccessful()) {
                     List<Colourmodel> colours = response.body();
-                   colourAdapter.setColours(colours);
+                    colourAdapter.setColours(colours);
                 } else {
-                    Log.e("API", "Failed to fetch colours: " + response.code());
+                    // Handle error
                 }
             }
 
             @Override
             public void onFailure(Call<List<Colourmodel>> call, Throwable t) {
-                Log.e("API", "Failed to fetch colours: " + t.getMessage());
+                // Handle failure
             }
         });
     }
 
-    private void updateColour() {
-        String colourId = etColourId.getText().toString().trim();
-        String description = etDescription.getText().toString().trim();
-        if (!colourId.isEmpty() && !description.isEmpty()) {
-            Call<Void> call = colourApi.updateColour(colourId, new Colourmodel(colourId, description));
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        etColourId.setText("");
-                        etDescription.setText("");
-                        getAllColours(); // Refresh the list after updating the color
-                    } else {
-                        Log.e("API", "Failed to update colours: " + response.code());
-                    }
+    private void updateColour(String colourId, Colourmodel updatedColour) {
+        Call<Void> call = colourApi.updateColour(colourId, updatedColour);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    getAllColours(); // Refresh the list after updating the color
+                } else {
+                    // Handle error
                 }
+            }
 
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("API", "Failed to update colours: " + t.getMessage());
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle failure
+            }
+        });
     }
 
-
-    private void deleteColour() {
-        String colourId = etColourId.getText().toString().trim();
-        if (!colourId.isEmpty()) {
-            Call<Void> call = colourApi.deleteColour(colourId);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        etColourId.setText("");
-                        getAllColours(); // Refresh the list after deleting the color
-                    } else {
-                        Log.e("API", "Failed to delete colours: " + response.code());
-                    }
+    private void deleteColour(String colourId) {
+        Call<Void> call = colourApi.deleteColour(colourId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    getAllColours(); // Refresh the list after deleting the color
+                } else {
+                    // Handle error
                 }
+            }
 
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Log.e("API", "Failed to delete colours: " + t.getMessage());
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle failure
+            }
+        });
     }
 }

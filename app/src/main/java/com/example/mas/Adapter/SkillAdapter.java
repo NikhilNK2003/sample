@@ -1,22 +1,15 @@
 package com.example.mas.Adapter;
-
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-
 import com.example.mas.Model.SkillModel;
 import com.example.mas.R;
-
+import com.example.mas.Skill;
 import java.util.List;
-
 public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> {
-
 
     private List<SkillModel> skills;
     private OnItemClickListener listener;
@@ -39,11 +32,12 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvSkill;
-
+        TextView SkillID;
+        TextView skilldesc;
         ViewHolder(View itemView) {
             super(itemView);
-            tvSkill = itemView.findViewById(R.id.tvSkill);
+            SkillID = itemView.findViewById(R.id.skillIdTextView);
+            skilldesc=itemView.findViewById(R.id.skilldescTextView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -68,7 +62,8 @@ public class SkillAdapter extends RecyclerView.Adapter<SkillAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         SkillModel skill = skills.get(position);
-        holder.tvSkill.setText(skill.getSkill_id() + "         " + skill.getDescription());
+        holder.SkillID.setText(skill.getSkill_id());
+        holder.skilldesc.setText(skill.getDescription());
     }
 
     @Override

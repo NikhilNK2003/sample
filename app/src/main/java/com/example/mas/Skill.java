@@ -3,8 +3,6 @@ package com.example.mas;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.mas.Adapter.SkillAdapter;
 import com.example.mas.Interface.SkillApiService;
-import com.example.mas.Model.Colourmodel;
 import com.example.mas.Model.SkillModel;
 
 import java.util.ArrayList;
@@ -29,15 +26,13 @@ public class Skill extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SkillAdapter skillAdapter;
     private List<SkillModel> skillList;
-    //private TextView tvSkillDetails;
+
     private EditText etSkillId, etSkillDescription;
     private Button btnCreate ;
     private Button btnGetAll ;
     private Button btnUpdate ;
     private Button btnDelete ;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +42,7 @@ public class Skill extends AppCompatActivity {
         recyclerView = findViewById(R.id.rvSkills);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         skillList = new ArrayList<>();
-        skillAdapter = new SkillAdapter(this, skillList);
+        skillAdapter = new SkillAdapter(skillList);
         recyclerView.setAdapter(skillAdapter);
 
         //tvSkillDetails = findViewById(R.id.tvSkillDetails);
@@ -90,28 +85,22 @@ public class Skill extends AppCompatActivity {
 
     };
 
-
-
-
-
     private void createSkill() {
         String skillId = etSkillId.getText().toString().trim();
         String description = etSkillDescription.getText().toString().trim();
         if (!skillId.isEmpty() && !description.isEmpty()) {
             Call<Void> call = skillApi.createSkill(new SkillModel(skillId, description));
-
             call.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        etSkillId.setText("");
-                        etSkillDescription.setText("");
+                        //etSkillId.setText("");
+                       // etSkillDescription.setText("");
                         getAllSkills(); // Refresh the list after creating the color
                     } else {
                         Log.e("API", "Failed to create skills: " + response.code());
                     }
                 }
-
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     Log.e("API", "Failed to create skills: " + t.getMessage());
@@ -149,7 +138,7 @@ public class Skill extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        etSkillId.setText("");
+                        //etSkillId.setText("");
                         getAllSkills(); // Refresh the list after updating the color
                     } else {
                         Log.e("API", "Failed to update skills: " + response.code());
@@ -173,7 +162,7 @@ public class Skill extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        etSkillId.setText("");
+                        //etSkillId.setText("");
                         getAllSkills(); // Refresh the list after deleting the color
                     } else {
                         Log.e("API", "Failed to delete skills: " + response.code());

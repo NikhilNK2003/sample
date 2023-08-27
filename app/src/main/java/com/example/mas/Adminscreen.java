@@ -51,7 +51,7 @@ public class Adminscreen extends AppCompatActivity {
        img6.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               startActivity(new Intent(Adminscreen.this, SizeActivity.class));
+               startActivity(new Intent(Adminscreen.this, Size.class));
            }
        });
 

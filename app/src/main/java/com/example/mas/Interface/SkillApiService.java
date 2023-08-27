@@ -20,10 +20,10 @@ public interface SkillApiService {
     @GET("/api/skill/getall")
     Call<List<SkillModel>> getAllSkills();
 
-    @PUT("/api/skill/{color_id}")
+    @PUT("/api/skill/{skill_id}")
     Call<Void> updateSkill(@Path("skill_id") String skillId, @Body SkillModel skill);
 
     @DELETE("/api/skill/{skill_id}")
-    Call<Void> deleteSkill(@Path("color_id") String skillId);
+    Call<Void> deleteSkill(@Path("skill_id") String skillId);
 
 }

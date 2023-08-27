@@ -1,26 +1,20 @@
 package com.example.mas;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import com.example.mas.Adapter.CustomerAdapter;
 import com.example.mas.Interface.CustomerApiService;
 import com.example.mas.Model.CustomerModel;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class CustomerActivity extends AppCompatActivity {
 
     private RecyclerView customerRecyclerView;
@@ -33,12 +27,10 @@ public class CustomerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
-
         customerRecyclerView = findViewById(R.id.RecyclerView);
         customerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         customerAdapter = new CustomerAdapter(this, new ArrayList<>());
         customerRecyclerView.setAdapter(customerAdapter);
-
         apiService = RetrofitInstance.getRetrofitInstance().create(CustomerApiService.class);
 
         customerIdEditText = findViewById(R.id.customerIdEditText);

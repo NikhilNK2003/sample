@@ -18,9 +18,6 @@
             android:name=".EmployeeJobsActivity"
             android:exported="false" />
         <activity
-            android:name=".SizeActivity"
-            android:exported="false" />
-        <activity
             android:name=".Size"
             android:exported="false" />
         <activity

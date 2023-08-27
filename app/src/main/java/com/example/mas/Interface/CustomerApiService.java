@@ -1,12 +1,8 @@
 package com.example.mas.Interface;
-
 import com.example.mas.Model.CustomerModel;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.*;
-
 public interface CustomerApiService {
     @POST("/api/customers/create")
     Call<Void> createCustomer(@Body CustomerModel customer);
